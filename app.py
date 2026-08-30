@@ -28,7 +28,7 @@ def adicionar():
         data,
         descricao)
         VALUES (?,?,?,?,?)
-        ''', (valor, tipo, categoria, data, descricao))
+        ''', (valor, tipo, categoria, data, descricao,))
         conn.commit()
 
         conn.close()
@@ -49,6 +49,19 @@ def listar():
     conn.close()
 
     return render_template('listar.html', transacoes=transacoes)
+
+@app.route('/excluir/<int:id>')
+def excluir(id):
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''DELETE FROM transacoes WHERE id = ?''',(id,))
+    conn.commit()
+
+    conn.close()
+
+    return redirect(url_for('listar'))
 
 if __name__ == '__main__':
     app.run(debug=True)
