@@ -19,6 +19,7 @@
                 <th>Categoria</th>
                 <th>Data</th>
                 <th>Descrição</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,9 @@
                 <td>{{ transacao[3] }}</td>
                 <td>{{ transacao[4] }}</td>
                 <td>{{ transacao[5] }}</td>
+                <td>
+                    <a href="/excluir/{{ transacao[0] }}">Excluir</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
