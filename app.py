@@ -21,14 +21,14 @@ def adicionar():
         cursor = conn.cursor()
 
         cursor.execute('''
-            INSERT INTO transacoes(
-            valor,
-            tipo,
-            categoria,
-            data,
-            descricao)
-            VALUES (?,?,?,?,?)
-            ''', (valor, tipo, categoria, data, descricao))
+        INSERT INTO transacoes(
+        valor,
+        tipo,
+        categoria,
+        data,
+        descricao)
+        VALUES (?,?,?,?,?)
+        ''', (valor, tipo, categoria, data, descricao))
         conn.commit()
 
         conn.close()
@@ -36,6 +36,19 @@ def adicionar():
         return redirect(url_for('index'))
 
     return render_template('adicionar.html')
+
+@app.route('/listar', methods=['GET'])
+def listar():
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''SELECT * FROM transacoes''')
+    transacoes = cursor.fetchall()
+
+    conn.close()
+
+    return render_template('listar.html', transacoes=transacoes)
 
 if __name__ == '__main__':
     app.run(debug=True)
