@@ -63,5 +63,19 @@ def excluir(id):
 
     return redirect(url_for('listar'))
 
+@app.route('/editar/<int:id>', methods=['GET', 'POST'])
+def editar(id):
+    if request.method == 'GET':
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        cursor.execute('''SELECT * FROM transacoes WHERE id=?''', (id,))
+        transacao = cursor.fetchone()
+
+        conn.close()
+
+        return render_template('editar.html', transacao=transacao )
+
 if __name__ == '__main__':
     app.run(debug=True)
