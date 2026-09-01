@@ -21,6 +21,13 @@
     </ul>
 </div>
 
+<form action="/listar" method="GET">
+    <label for="mes">Filtrar por mês:</label>
+    <input type="month" name="mes" id="mes">
+    <button type="submit">Filtrar</button>
+</form>
+<a href="/listar">Limpar filtro</a>
+
 <a href="/adicionar">Adicionar nova transação</a>
 
     <table border="1">
