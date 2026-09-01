@@ -46,9 +46,17 @@ def listar():
     cursor.execute('''SELECT * FROM transacoes''')
     transacoes = cursor.fetchall()
 
+    cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ?''', ('receita',))
+    receita = cursor.fetchone()[0]
+
+    cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ?''', ('despesa',))
+    despesa = cursor.fetchone()[0]
+
+    saldo = receita - despesa
+
     conn.close()
 
-    return render_template('listar.html', transacoes=transacoes)
+    return render_template('listar.html', transacoes=transacoes, saldo=saldo, receita=receita, despesa=despesa)
 
 @app.route('/excluir/<int:id>')
 def excluir(id):
