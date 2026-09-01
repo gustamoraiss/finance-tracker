@@ -12,6 +12,13 @@
     <p><strong>Saldo:</strong> R$ {{ "%.2f"|format(saldo) }}</p>
     <p><strong>Receitas:</strong> R$ {{ "%.2f"|format(receita) }}</p>
     <p><strong>Despesas:</strong> R$ {{ "%.2f"|format(despesa) }}</p>
+
+    <h3>Despesas por categoria: </h3>
+    <ul>
+        {% for categoria, total in gasto_por_categoria %}
+        <li>{{ categoria }}: R$ {{ "%.2f"|format(total) }}</li>
+        {% endfor %}
+    </ul>
 </div>
 
 <a href="/adicionar">Adicionar nova transação</a>
