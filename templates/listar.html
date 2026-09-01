@@ -8,7 +8,13 @@
 <body>
     <h1>Minhas Transações</h1>
 
-    <a href="/adicionar">Adicionar nova transação</a>
+<div>
+    <p><strong>Saldo:</strong> R$ {{ "%.2f"|format(saldo) }}</p>
+    <p><strong>Receitas:</strong> R$ {{ "%.2f"|format(receita) }}</p>
+    <p><strong>Despesas:</strong> R$ {{ "%.2f"|format(despesa) }}</p>
+</div>
+
+<a href="/adicionar">Adicionar nova transação</a>
 
     <table border="1">
         <thead>
