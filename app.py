@@ -77,5 +77,31 @@ def editar(id):
 
         return render_template('editar.html', transacao=transacao )
 
+    if request.method == 'POST':
+
+        valor = request.form['valor']
+        tipo = request.form['tipo']
+        categoria = request.form['categoria']
+        data = request.form['data']
+        descricao = request.form['descricao']
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        cursor.execute('''
+        UPDATE transacoes SET
+        valor = ?,
+        tipo = ?,
+        categoria = ?,
+        data = ?,
+        descricao = ?
+        WHERE id = ?
+        ''', (valor, tipo, categoria, data, descricao, id,))
+        conn.commit()
+
+        conn.close()
+
+        return redirect(url_for('listar'))
+
 if __name__ == '__main__':
     app.run(debug=True)
