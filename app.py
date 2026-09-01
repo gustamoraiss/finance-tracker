@@ -54,9 +54,12 @@ def listar():
 
     saldo = receita - despesa
 
+    cursor.execute('''SELECT categoria, SUM(valor) FROM transacoes WHERE tipo = ? GROUP BY categoria''', ('despesa',))
+    gasto_por_categoria = cursor.fetchall()
+
     conn.close()
 
-    return render_template('listar.html', transacoes=transacoes, saldo=saldo, receita=receita, despesa=despesa)
+    return render_template('listar.html', transacoes=transacoes, saldo=saldo, receita=receita, despesa=despesa, gasto_por_categoria=gasto_por_categoria)
 
 @app.route('/excluir/<int:id>')
 def excluir(id):
