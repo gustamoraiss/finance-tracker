@@ -43,18 +43,32 @@ def listar():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
-    cursor.execute('''SELECT * FROM transacoes''')
+    mes = request.args.get('mes')
+
+    if mes:
+        cursor.execute('''SELECT * FROM transacoes WHERE strftime('%Y-%m', data) = ?''', (mes,))
+    else:
+        cursor.execute('''SELECT * FROM transacoes''')
     transacoes = cursor.fetchall()
 
-    cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ?''', ('receita',))
+    if mes:
+        cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ? AND strftime('%Y-%m', data) = ?''', ('receita',mes,))
+    else:
+        cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ?''', ('receita',))
     receita = cursor.fetchone()[0]
 
-    cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ?''', ('despesa',))
+    if mes:
+        cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ? AND strftime('%Y-%m', data) = ?''', ('despesa',mes,))
+    else:
+        cursor.execute('''SELECT COALESCE(SUM(valor), 0) FROM transacoes WHERE tipo = ?''', ('despesa',))
     despesa = cursor.fetchone()[0]
 
     saldo = receita - despesa
 
-    cursor.execute('''SELECT categoria, SUM(valor) FROM transacoes WHERE tipo = ? GROUP BY categoria''', ('despesa',))
+    if mes:
+        cursor.execute('''SELECT categoria, SUM(valor) FROM transacoes WHERE tipo = ? AND strftime('%Y-%m', data) = ? GROUP BY categoria''', ('despesa',mes,))
+    else:
+        cursor.execute('''SELECT categoria, SUM(valor) FROM transacoes WHERE tipo = ? GROUP BY categoria''', ('despesa',))
     gasto_por_categoria = cursor.fetchall()
 
     conn.close()
