@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -127,6 +127,26 @@ def editar(id):
         conn.close()
 
         return redirect(url_for('listar'))
+
+@app.route('/api/gastos-categoria', methods=['GET'])
+def api():
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    mes = request.args.get('mes')
+
+    if mes:
+        cursor.execute('''SELECT categoria, SUM(valor) FROM transacoes WHERE tipo = ? AND strftime('%Y-%m', data) = ? GROUP BY categoria''', ('despesa',mes,))
+    else:
+        cursor.execute('''SELECT categoria, SUM(valor) FROM transacoes WHERE tipo = ? GROUP BY categoria''', ('despesa',))
+    gasto_por_categoria = cursor.fetchall()
+
+    dados = []
+    for categoria, total in gasto_por_categoria:
+        dados.append({'categoria': categoria, 'total': total})
+
+    return jsonify(dados)
 
 if __name__ == '__main__':
     app.run(debug=True)
