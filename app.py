@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Funcionando"
+    return redirect(url_for('listar'))
 
 @app.route('/adicionar', methods=['GET','POST'])
 def adicionar():
@@ -33,7 +33,7 @@ def adicionar():
 
         conn.close()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('listar'))
 
     return render_template('adicionar.html')
 
