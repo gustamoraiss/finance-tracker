@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --fundo: #F3F4F2;
+  --superficie: #FFFFFF;
+  --tinta: #1B1F1D;
+  --texto-suave: #5B6259;
+  --borda: #E1E0DA;
+  --destaque: #2F6F62;
+  --destaque-suave: #E4EDE9;
+  --despesa-cor: #B65C4B;
+  --despesa-suave: #F5E7E3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 3.5rem 1.5rem;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+.pagina {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: 'Newsreader', serif;
+  font-weight: 600;
+  font-size: 2.1rem;
+  margin: 0 0 2rem 0;
+  letter-spacing: -0.01em;
+}
+
+h1.titulo-central {
+  text-align: center;
+}
+
+h3 {
+  font-family: 'Newsreader', serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 0 0 1rem 0;
+}
+
+a {
+  color: var(--destaque);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  border-bottom-color: var(--destaque);
+}
+
+/* resumo (saldo/receita/despesa) */
+
+.resumo {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.resumo .saldo-rotulo {
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  margin: 0 0 0.4rem 0;
+}
+
+.resumo .saldo-valor {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+}
+
+.resumo-linha {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  border-top: 1px solid var(--borda);
+  padding-top: 1.25rem;
+}
+
+.resumo-linha div p {
+  margin: 0;
+}
+
+.resumo-linha .rotulo {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.resumo-linha .valor {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.valor.receita { color: var(--destaque); }
+.valor.despesa { color: var(--despesa-cor); }
+
+/* categorias */
+
+.secao-categorias {
+  margin-bottom: 2.5rem;
+}
+
+.categorias {
+  list-style: none;
+  padding: 0.5rem 1.25rem;
+  margin: 0;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+}
+
+.categorias li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--borda);
+  font-size: 0.95rem;
+}
+
+.categorias li:last-child {
+  border-bottom: none;
+}
+
+.categorias .total {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--despesa-cor);
+}
+
+/* filtro */
+
+.filtro {
+  display: flex;
+  align-items: end;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.filtro label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin-bottom: 0.4rem;
+}
+
+/* botões e inputs */
+
+input, select, button {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+}
+
+input, select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  background: var(--superficie);
+  color: var(--tinta);
+}
+
+button, .botao {
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  border: 1px solid var(--destaque);
+  background: var(--destaque);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+button:hover, .botao:hover {
+  opacity: 0.9;
+}
+
+.botao-adicionar {
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+/* tabela (extrato) */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead th {
+  text-align: left;
+  color: var(--texto-suave);
+  font-weight: 500;
+  font-size: 0.78rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--borda);
+  background: var(--fundo);
+}
+
+tbody td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+td.valor {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.acoes a {
+  margin-right: 0.9rem;
+  font-size: 0.85rem;
+}
+
+/* forms (adicionar/editar) */
+
+.form-cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 2.5rem;
+  max-width: 420px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.campo {
+  margin-bottom: 1.3rem;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+  margin-bottom: 0.4rem;
+}
+
+.campo input, .campo select {
+  width: 100%;
+}
+
+.pagina p {
+  text-align: center;
+}
