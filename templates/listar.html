@@ -39,6 +39,10 @@
             {% endif %}
         </div>
 
+        <div class="secao-grafico">
+            <canvas id="graficoCategorias"></canvas>
+        </div>
+
         <form class="filtro" action="/listar" method="GET">
             <div>
                 <label for="mes">Filtrar por mês</label>
@@ -80,5 +84,7 @@
             </tbody>
         </table>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>
