@@ -267,3 +267,9 @@ td.valor {
 .pagina p {
   text-align: center;
 }
+
+.secao-grafico {
+    max-width: 400px;
+    height: 300px;
+    margin: 0 auto 2.5rem auto;
+}
